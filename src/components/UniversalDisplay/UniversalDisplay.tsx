@@ -1,15 +1,16 @@
-import s from './UniversalDisplay.module.css'
+import s from "./UniversalDisplay.module.css";
+import { FC } from "react";
 
 type countDisplay = {
   count: number;
+  countMax: number;
 };
 
-export const UniversalDisplay = (props: countDisplay) => {
+export const UniversalDisplay: FC<countDisplay> = (props) => {
+  const { count, countMax } = props;
   return (
-    <div className={props.count === 5 ? s.stop : ""}>
-      <div className={s.countDisplay}>
-        <div>{props.count}</div>
-      </div>
+    <div className={count === countMax ? s.stop : ""}>
+      <div className={s.countDisplay}>{count}</div>
     </div>
   );
 };

@@ -3,22 +3,23 @@ import "./App.css";
 import { Setter } from "./components/Setter/Setter";
 import { Counter } from "./components/Counter/Counter";
 
+let maxValue = 5;
+let startValue = 0;
+
 function App() {
-  const countMax: number = 5;
-  const countStart: number = 0;
-
-  const [count, setCount] = useState<number>(countStart);
+  const [count, setCount] = useState<number>(startValue);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    let valueAsString = localStorage.getItem("counterValue");
-    if (valueAsString) {
-      let newValue = JSON.parse(valueAsString);
-      setCount(newValue);
+    const numberMaxValue = localStorage.getItem("maxValue");
+    const numberStartValue = localStorage.getItem("startValue");
+
+    if (numberMaxValue) {
+      maxValue = Number(numberMaxValue);
     }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("counterValue", JSON.stringify(count));
+    if (numberStartValue) {
+      startValue = Number(numberStartValue);
+    }
   }, [count]);
 
   const Increment = () => {
@@ -26,18 +27,19 @@ function App() {
   };
 
   const Reset = () => {
-    setCount(countStart);
+    setCount(startValue);
   };
 
   return (
     <div className="App">
-      <Setter />
+      <Setter setCount={setCount} setError={setError} />
       <Counter
-        countCurent={count}
+        error={error}
+        countCurrent={count}
         onClickIncrement={Increment}
         onClickReset={Reset}
-        countMax={countMax}
-        countStart={countStart}
+        countMax={maxValue}
+        countStart={startValue}
       />
     </div>
   );

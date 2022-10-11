@@ -1,18 +1,21 @@
-type buttonPropsType = {
+import s from "./UniversalButton.module.css";
+
+type ButtonPropsType = {
   title: string;
   onClickHandler: () => void;
   disabled: boolean;
 };
 
-export const UniversalButton = (props: buttonPropsType) => {
+export const UniversalButton = (props: ButtonPropsType) => {
+  const { title, onClickHandler, disabled } = props;
   return (
     <div>
       <button
-        className={''}
-        onClick={props.onClickHandler}
-        disabled={props.disabled}
+        onClick={onClickHandler}
+        disabled={disabled}
+        className={disabled ? `${s.disabled}` : ""}
       >
-        {props.title}
+        {title}
       </button>
     </div>
   );
