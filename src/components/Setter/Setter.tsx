@@ -15,7 +15,7 @@ export const Setter = (props: SetterPropsType) => {
 
   const onClickSetter = () => {
     if (!Number.isInteger(startValue) || !Number.isInteger(maxValue)) {
-      setError("value must be ceil number");
+      setError("Value must be ceil number");
     } else {
       localStorage.setItem("startValue", JSON.stringify(startValue));
       localStorage.setItem("maxValue", JSON.stringify(maxValue));
@@ -33,7 +33,7 @@ export const Setter = (props: SetterPropsType) => {
       return true;
     }
     if (maxValue <= 0 || startValue < 0) {
-      setError("Incorrect start or max value");
+      setError("Value must be above zero");
       return true;
     }
     return false;
